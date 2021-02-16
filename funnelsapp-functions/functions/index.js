@@ -1,14 +1,11 @@
 const functions = require("firebase-functions");
 
-const app = require("express")();
+const app = require('express')();
 
 const FBAuth = require("./util/fbAuth");
 
-const { getAllPosts } = require("./handlers/posts");
+const { getAllPosts, postOnePost } = require("./handlers/posts");
 const { signup, login } = require("./handlers/users");
-
-const firebase = require("firebase");
-firebase.initializeApp(config);
 
 // Post routes
 app.get("/posts", getAllPosts);
