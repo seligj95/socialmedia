@@ -133,7 +133,21 @@ exports.onPostDelete = functions
       .catch((err) => console.error(err));
   });
 
-// TODO: onUserDelete - delete all data like above - use the above function in method, looks like you only have to delete posts and that will trigger the above
-// delete user from authentication - delete user from database, delete posts, this will drigger onPostDelete
+// delete user from authentication/delete user from database, triggers onDeletePost
 exports.onUserDelete = functions
-  .firestore.document
+  .firestore.document('/users/{handle}')
+  .onDelete((snapshot, context) => {
+    const userHandle = context.params.handle;
+    const batch = db.batch();
+    return db
+      .collection('posts')
+      .where('userHandle', '==', userHandle)
+      .get()
+      .then((data) => {
+        data.forEach((doc) => {
+          batch.delete(db.doc(`/posts/${doc.id}`));
+        });
+        return batch.commit()
+      })
+      .catch((err) => console.error(err));
+  });
