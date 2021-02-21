@@ -5,7 +5,7 @@ const FBAuth = require("./util/fbAuth");
 const { db } = require('./util/admin');
 
 const { getAllPosts, postOnePost, getPost, commentOnPost, likePost, unlikePost, deletePost } = require("./handlers/posts");
-const { signup, login, uploadImage, addUserDetails, getAuthenticatedUser, getUserDetails, markNotificationsRead } = require("./handlers/users");
+const { signup, login, uploadImage, addUserDetails, getAuthenticatedUser, getUserDetails, markNotificationsRead, deleteUser } = require("./handlers/users");
 
 // Post routes
 app.get("/posts", getAllPosts);
@@ -24,6 +24,7 @@ app.post("/user", FBAuth, addUserDetails);
 app.get("/user", FBAuth, getAuthenticatedUser);
 app.get('/user/:handle', getUserDetails);
 app.post('/notifications',FBAuth, markNotificationsRead);
+app.delete("/user", FBAuth, deleteUser)
 
 // https://baseurl.com/api/
 exports.api = functions.https.onRequest(app);
@@ -133,3 +134,6 @@ exports.onPostDelete = functions
   });
 
 // TODO: onUserDelete - delete all data like above - use the above function in method, looks like you only have to delete posts and that will trigger the above
+// delete user from authentication - delete user from database, delete posts, this will drigger onPostDelete
+exports.onUserDelete = functions
+  .firestore.document
