@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
-// import CommentForm from './CommentForm';
+import CommentForm from './CommentForm';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 // MUI Stuff
@@ -113,7 +113,7 @@ class PostDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeparator} />
           <Typography variant="body2" color="textSecondary">
-            {dayjs(createdAt).format('h:mm a, MMMM DD YYYY')}
+            {dayjs(createdAt).format('MMMM D, YYYY h:mm A')}
           </Typography>
           <hr className={classes.invisibleSeparator} />
           <Typography variant="body1">{body}</Typography>
@@ -124,10 +124,8 @@ class PostDialog extends Component {
           </MyButton>
           <span>{commentCount} Comments</span>
         </Grid>
-        {commentCount !== 0 && (
-            <hr className={classes.visibleSeparator} />
-        )}
-        {/* <CommentForm postId={postId} /> */}
+        <hr className={classes.visibleSeparator} />
+        <CommentForm postId={postId} />
         <Comments comments={comments} />
       </Grid>
     );
