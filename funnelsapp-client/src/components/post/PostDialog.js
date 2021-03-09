@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import LikeButton from './LikeButton';
-// import Comments from './Comments';
+import Comments from './Comments';
 // import CommentForm from './CommentForm';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
 // Redux stuff
 import { connect } from 'react-redux';
-import { getPost, clearErrors } from '../redux/actions/dataActions';
+import { getPost, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -124,9 +124,11 @@ class PostDialog extends Component {
           </MyButton>
           <span>{commentCount} Comments</span>
         </Grid>
-        <hr className={classes.visibleSeparator} />
-        {/* <CommentForm postId={postId} />
-        <Comments comments={comments} /> */}
+        {commentCount !== 0 && (
+            <hr className={classes.visibleSeparator} />
+        )}
+        {/* <CommentForm postId={postId} /> */}
+        <Comments comments={comments} />
       </Grid>
     );
     return (
