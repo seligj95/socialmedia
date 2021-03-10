@@ -1,12 +1,9 @@
-// https://3003-eb1bf22b-c0fd-44d1-a1f1-dfb969bfe97e.us-east1.cloudshell.dev
-
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import jwtDecode from 'jwt-decode';
-import themeObject from './util/theme';
 // Redux
 import { Provider } from 'react-redux';
 import store from './redux/store';
@@ -14,6 +11,7 @@ import { SET_AUTHENTICATED } from './redux/types';
 import { logoutUser, getUserData } from './redux/actions/userActions';
 // Components
 import Navbar from './components/layout/Navbar';
+import themeObject from './util/theme';
 import AuthRoute from './util/AuthRoute';
 // Pages
 import home from './pages/home';
