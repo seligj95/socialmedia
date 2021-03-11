@@ -10,25 +10,25 @@ import {
   LOADING_UI,
   SET_POST,
   STOP_LOADING_UI,
-  SUBMIT_COMMENT
-} from '../types';
-import axios from 'axios';
+  SUBMIT_COMMENT,
+} from "../types";
+import axios from "axios";
 
 // Get all posts
 export const getPosts = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios
-    .get('/posts')
+    .get("/posts")
     .then((res) => {
       dispatch({
         type: SET_POSTS,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch((err) => {
       dispatch({
         type: SET_POSTS,
-        payload: []
+        payload: [],
       });
     });
 };
@@ -39,7 +39,7 @@ export const getPost = (postId) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: SET_POST,
-        payload: res.data
+        payload: res.data,
       });
       dispatch({ type: STOP_LOADING_UI });
     })
@@ -49,18 +49,18 @@ export const getPost = (postId) => (dispatch) => {
 export const postPost = (newPost) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post('/post', newPost)
+    .post("/post", newPost)
     .then((res) => {
       dispatch({
         type: POST_POST,
-        payload: res.data
+        payload: res.data,
       });
       dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       });
     });
 };
@@ -71,7 +71,7 @@ export const likePost = (postId) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: LIKE_POST,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch((err) => console.log(err));
@@ -83,7 +83,7 @@ export const unlikePost = (postId) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: UNLIKE_POST,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch((err) => console.log(err));
@@ -95,14 +95,14 @@ export const submitComment = (postId, commentData) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: SUBMIT_COMMENT,
-        payload: res.data
+        payload: res.data,
       });
       dispatch(clearErrors());
     })
     .catch((err) => {
       dispatch({
         type: SET_ERRORS,
-        payload: err.response.data
+        payload: err.response.data,
       });
     });
 };
@@ -122,13 +122,13 @@ export const getUserData = (userHandle) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: SET_POSTS,
-        payload: res.data.posts
+        payload: res.data.posts,
       });
     })
     .catch(() => {
       dispatch({
         type: SET_POSTS,
-        payload: null
+        payload: null,
       });
     });
 };

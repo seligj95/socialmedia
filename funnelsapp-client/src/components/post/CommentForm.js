@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
 // MUI Stuff
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 // Redux stuff
-import { connect } from 'react-redux';
-import { submitComment } from '../../redux/actions/dataActions';
+import { connect } from "react-redux";
+import { submitComment } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
-  ...theme.spreadThis
+  ...theme.spreadThis,
 });
 
 class CommentForm extends Component {
   state = {
-    body: '',
-    errors: {}
+    body: "",
+    errors: {},
   };
 
   componentWillReceiveProps(nextProps) {
@@ -24,7 +24,7 @@ class CommentForm extends Component {
       this.setState({ errors: nextProps.UI.errors });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: '' });
+      this.setState({ body: "" });
     }
   }
 
@@ -41,7 +41,7 @@ class CommentForm extends Component {
     const errors = this.state.errors;
 
     const commentFormMarkup = authenticated ? (
-      <Grid item sm={12} style={{ textAlign: 'center' }}>
+      <Grid item sm={12} style={{ textAlign: "center" }}>
         <form onSubmit={this.handleSubmit}>
           <TextField
             name="body"
@@ -80,10 +80,9 @@ CommentForm.propTypes = {
 
 const mapStateToProps = (state) => ({
   UI: state.UI,
-  authenticated: state.user.authenticated
+  authenticated: state.user.authenticated,
 });
 
-export default connect(
-  mapStateToProps,
-  { submitComment }
-)(withStyles(styles)(CommentForm));
+export default connect(mapStateToProps, { submitComment })(
+  withStyles(styles)(CommentForm)
+);

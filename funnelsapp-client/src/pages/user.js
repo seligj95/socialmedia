@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import Post from '../components/post/Post';
-import StaticProfile from '../components/profile/StaticProfile';
-import Grid from '@material-ui/core/Grid';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+import Post from "../components/post/Post";
+import StaticProfile from "../components/profile/StaticProfile";
+import Grid from "@material-ui/core/Grid";
 
-import PostSkeleton from '../util/PostSkeleton';
-import ProfileSkeleton from '../util/ProfileSkeleton';
+import PostSkeleton from "../util/PostSkeleton";
+import ProfileSkeleton from "../util/ProfileSkeleton";
 
-import { connect } from 'react-redux';
-import { getUserData } from '../redux/actions/dataActions';
+import { connect } from "react-redux";
+import { getUserData } from "../redux/actions/dataActions";
 
 class user extends Component {
   state = {
     profile: null,
-    postIdParam: null
+    postIdParam: null,
   };
   componentDidMount() {
     const handle = this.props.match.params.handle;
@@ -27,7 +27,7 @@ class user extends Component {
       .get(`/user/${handle}`)
       .then((res) => {
         this.setState({
-          profile: res.data.user
+          profile: res.data.user,
         });
       })
       .catch((err) => console.log(err));
@@ -69,14 +69,11 @@ class user extends Component {
 
 user.propTypes = {
   getUserData: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  data: state.data
+  data: state.data,
 });
 
-export default connect(
-  mapStateToProps,
-  { getUserData }
-)(user);
+export default connect(mapStateToProps, { getUserData })(user);

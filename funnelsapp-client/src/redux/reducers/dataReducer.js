@@ -6,33 +6,33 @@ import {
   DELETE_POST,
   POST_POST,
   SET_POST,
-  SUBMIT_COMMENT
-} from '../types';
+  SUBMIT_COMMENT,
+} from "../types";
 
 const initialState = {
   posts: [],
   post: {},
-  loading: false
+  loading: false,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOADING_DATA:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case SET_POSTS:
       return {
         ...state,
         posts: action.payload,
-        loading: false
+        loading: false,
       };
     case SET_POST:
       return {
         ...state,
-        post: action.payload
+        post: action.payload,
       };
     case LIKE_POST:
     case UNLIKE_POST:
@@ -44,7 +44,7 @@ export default function(state = initialState, action) {
         state.post = action.payload;
       }
       return {
-        ...state
+        ...state,
       };
     case DELETE_POST:
       let deleteIndex = state.posts.findIndex(
@@ -52,20 +52,20 @@ export default function(state = initialState, action) {
       );
       state.posts.splice(deleteIndex, 1);
       return {
-        ...state
+        ...state,
       };
     case POST_POST:
       return {
         ...state,
-        posts: [action.payload, ...state.posts]
+        posts: [action.payload, ...state.posts],
       };
     case SUBMIT_COMMENT:
       return {
         ...state,
         post: {
           ...state.post,
-          comments: [action.payload, ...state.post.comments]
-        }
+          comments: [action.payload, ...state.post.comments],
+        },
       };
     default:
       return state;
